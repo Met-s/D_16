@@ -1,0 +1,16 @@
+{% extends 'board/flatpages/default.html' %}
+{% block title %}
+ Create Post
+{% endblock title %}
+
+{% block content %}
+    {% load static %}
+    <h2>Create Post</h2>
+    <hr>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form }}
+        <input type="submit" value="Save">
+    </form>
+{% endblock content %}

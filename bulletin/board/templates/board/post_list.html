@@ -11,8 +11,9 @@
     {% for post in posts %}
         {{ post.post_author }}
         {{ post.post_category}}
-        {{ post.post_title}}
+        <a href="{% url 'post_detail' pk=post.id %}">{{ post.post_title}}</a>
         {{ post.post_text|safe }}
         {{ post.post_date }}
+    <hr>
     {% endfor %}
 {% endblock content %}}
