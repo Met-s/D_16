@@ -36,9 +36,6 @@ python manage.py collectstatic
 ----------
 
 
-
-
-
 ----------
 
 ----------
