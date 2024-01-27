@@ -3,7 +3,31 @@
 Одно Объявление
 {% endblock title %}
 
+<style>
+      #box {
+        border: 1px solid blue;
+        width: 2000000px;
+
+        white-space: nowrap;
+        overflow: hidden;
+      }
+</style>
+
 {% block content %}
-<h2>post.html</h2>
-    <h3>{{ post }}</h3>
+    {% load static %}
+        <h2>post.html</h2>
+<hr>
+<h2>{{ post.post_title }}</h2>
+<div id="box">
+
+    Категория: {{ post.post_category }}
+
+</div>
+        {{post.post_text|safe }}
+        <br>Автор объявления: {{post.post_author}}
+        <br>Опубликовано: {{post.post_date|date:'d:M:Y'}}
+
+<h2>{{ post_detail.get_category_display }}</h2>
+
+
 {% endblock content %}

@@ -20,13 +20,14 @@ class Post(models.Model):
     ]
     post_author = models.ForeignKey(User, on_delete=models.CASCADE)
     post_title = models.CharField(max_length=128, unique=True)
-    post_category = models.CharField(max_length=64, choices=CATEGORY,
+    post_category = models.CharField(max_length=16, choices=CATEGORY,
                                      default="dd")
     post_text = RichTextUploadingField(config_name="custom")  # Uploading
     post_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.post_author} : {self.post_title}"
+        return (f"{self.post_author} : {self.post_title} : "
+                f"{self.post_category}")
 
     def get_absolute_url(self):
         return reverse("post")

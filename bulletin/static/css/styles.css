@@ -103,7 +103,14 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
+/*=====*/
+div {
+    border: 1px solid black;
+    width: 70px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/*=====*/
 hr {
   margin: 1rem 0;
   color: inherit;

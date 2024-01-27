@@ -28,11 +28,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/post/">Posts</a>
+                            <a class="nav-link"
+                               href="{% url 'post_list' %}">Posts
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/post/create/">
-                                Create_Post
+                            <a class="nav-link"
+                               href="{% url 'post_create' %}">Create_Post
                             </a>
                         </li>
                     </ul>
