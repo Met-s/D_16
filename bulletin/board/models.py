@@ -30,9 +30,7 @@ class Post(models.Model):
                 f"{self.post_category}")
 
     def get_absolute_url(self):
-        return reverse("post")
-        # return f'/news/{self.pk}'
-        # return f"/post/"
+        return f'/posts/{self.pk}'
 
 
 class Reply(models.Model):

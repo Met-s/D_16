@@ -1,7 +1,6 @@
-
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.views.generic import ListView, CreateView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import (ListView, CreateView, DetailView,
+                                  UpdateView, DeleteView)
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Post
 from .forms import PostForm
@@ -13,6 +12,12 @@ class PostList(ListView):
     template_name = 'board/post_list.html'
     context_object_name = 'posts'
     paginate_by = 5
+
+
+class PostDetail(DetailView):
+    model = Post
+    template_name = 'board/post.html'
+    context_object_name = 'post'
 
 
 class PostCreate(PermissionRequiredMixin, CreateView):
@@ -27,22 +32,20 @@ class PostCreate(PermissionRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-# def add_post(request):
-#     if form_class.is_valid():
-#             post_item = form_class.save(commit=False)
-#             post_item.save()
-#             return redirect('post_list')
-#     else:
-#         form = PostForm()
-#     return render(request, 'reply/post_form.html',
-#                   {'form': form})
-
-    # def post(self, *args):
-    #     return reverse('post')
-
-
-class PostDetail(DetailView):
+class PostUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'board.add_post'
+    form_class = PostForm
     model = Post
-    template_name = 'board/post.html'
-    context_object_name = 'post'
+    template_name = 'board/post_create.html'
+
+
+class PostDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'board/add_post'
+    model = Post
+    template_name = 'board/post_delete.html'
+    success_url = reverse_lazy('post_list')
+
+
+
+
 
