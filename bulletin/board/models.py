@@ -22,7 +22,8 @@ class Post(models.Model):
     post_title = models.CharField(max_length=128, unique=True)
     post_category = models.CharField(max_length=16, choices=CATEGORY,
                                      default="dd")
-    post_text = RichTextUploadingField(config_name="custom")  # Uploading
+    post_text = RichTextUploadingField(null=True, config_name="default")  #
+    # Uploading
     post_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
