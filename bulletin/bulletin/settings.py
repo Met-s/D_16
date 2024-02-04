@@ -124,33 +124,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-
-# STATIC_URL = '/static/'
-# STATIC_DIR = os.path.join(BASE_DIR, "static")
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = 'media/'
-# STATICFILES_DIRS = [STATIC_DIR]
-# CKEDITOR_UPLOADER_PATH = "uploads/"
-# CKEDITOR_UPLOAD_PATH = 'content/ckeditor/'
-# --------------
 STATIC_URL = 'static/'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static/images')
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
-
 CKEDITOR_BASE_PATH = '/static/ckeditor/ckeditor/'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
-
-# /images/uploads/2024/02/03/2.webm Кролик новый год
-# /images/uploads/2024/02/03/3.jpg
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-# # MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
-# # STATIC_DIR = 'static/'
-# # STATIC_ROOT = os.path.join(BASE_DIR, "static")
-# CKEDITOR_BASE_PATH = '/static/ckeditor/ckeditor/'
-# CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -164,7 +144,6 @@ CKEDITOR_CONFIGS = {
             ]),
     },
 }
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
