@@ -172,6 +172,60 @@ venv/Lib/site-packages/allauth/templates/allauth/layouts/base.html
 
 добавляем перенаправление на базовый шаблон default.html
 {% extends "board/flatpages/default.html" %}
+__________Кнопки в базовом шаблоне ВХОД, РЕГИСТРАЦИЯ И ВЫХОД______
+В базовый шаблон default.html добавил кнопки.
+Теперь если пользователь авторизован у него будет отображаться кнопка "ВЫХОД",
+если не авторизован будут видны кнопки на "ВХОД" и "РЕГИСТРАЦИЮ".
+
+{% if user.is_authenticated %}
+
+                        <li class="nav-item active">
+                                <a class="nav-link"
+                                   href="/accounts/logout/">Выход
+                                    <span class="sr-only"></span>
+                                </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'account_login' %}">Вход
+                                    <span class="sr-only"></span>
+                                </a>
+                        </li>
+                        <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'account_signup' %}">Регистрация
+                                    <span class="sr-only"></span>
+                                </a>
+                        </li>
+                    {% endif %}
+
+----------Другой вариант кнопок----------
+                        <li>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'account_logout' %}"
+                                   style="color: rgb(255, 255, 255);
+                                   font-weight: 400;
+                                   text-transform: uppercase;">ВЫХОД
+                                </a>
+                            {% else %}
+                                <a href="{% url 'account_login' %}"
+                                   style="color: rgb(255, 255, 255);
+                                   font-weight: 400;
+                                   text-transform: uppercase;">ВХОД
+                                </a>
+                                <a href="{% url 'account_signup' %}"
+                                   style="color: rgb(255, 255, 255);
+                                   font-weight: 400;
+                                   text-transform: uppercase;">Регистрация
+                                </a>
+                            {% endif %}
+                        </li>
+
+----------
+
+----------
+
+----------
+
 ----------
 
 ----------
@@ -180,5 +234,8 @@ venv/Lib/site-packages/allauth/templates/allauth/layouts/base.html
 
 ----------
 
+----------
 
-/logout/
+----------
+
+----------
