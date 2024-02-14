@@ -105,27 +105,80 @@ CKEDITOR_CONFIGS = {
 }
 Подробнее здесь:
 https://django-ckeditor.readthedocs.io/en/latest/#plugins
+___________Регистрация__________
+Установил Allauth:
+pip install django-allauth
+
+В settings.py: добавляем настройки
+
+В INSTALLED_APPS
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    Эти разделы должны уже быть:
+
+    'django.contrib.auth',
+    'django.contrib.messages',
+    'django.contrib.sites',
+----------
+MIDDLEWARE = [
+            ...
+    'allauth.account.middleware.AccountMiddleware',
+----------
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+----------
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+----------
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+----------
+Проводим миграции
+python manage.py migrate
+----------
+Настраиваем urls.py
+bulletin/urls.py
+
+path('accounts/', include("allauth.urls")),
+
+Теперь если перейдём по ссылке:
+http://127.0.0.1:8000/accounts/signup/
+Попадём на страницу с формой для регистрации
+----------
+Чтобы форма регистрации отображалась в базовом шаблоне нужно в базовом шаблоне
+allauth
+venv/Lib/site-packages/allauth/templates/allauth/layouts/base.html
+
+добавляем перенаправление на базовый шаблон default.html
+{% extends "board/flatpages/default.html" %}
+----------
+
+----------
+
 ----------
 
 ----------
 
 
-----------
-
-----------
-
-----------
-
-----------
-
-----------
-
-----------
-
-----------
-
-----------
-
-----------
-
-----------
+/logout/

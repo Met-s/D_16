@@ -1,7 +1,8 @@
 from django.urls import reverse_lazy
 from django.views.generic import (ListView, CreateView, DetailView,
                                   UpdateView, DeleteView)
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, \
+    LoginRequiredMixin
 from .models import Post
 from .forms import PostForm
 
@@ -20,7 +21,8 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 
-class PostCreate(PermissionRequiredMixin, CreateView):
+class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    raise_exception = True  # pos LoginRequiredMixin
     permission_required = 'add_post'
     form_class = PostForm
     model = Post
