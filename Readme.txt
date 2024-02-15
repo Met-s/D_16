@@ -220,8 +220,13 @@ __________Кнопки в базовом шаблоне ВХОД, РЕГИСТР
                             {% endif %}
                         </li>
 
-----------
+_________Регистрация пользователя с подтверждением по email____
+settings.py
 
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1  # количество дней для активации
+ACCOUNT_USERNAME_MIN_LENGTH = 4     # минимальное количество символов логина
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend' # "dummy" или
+    "console" будет крутиться в консоли, если "smtp" то отправляется на сервер
 ----------
 
 ----------

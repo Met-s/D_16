@@ -39,8 +39,10 @@
                         </li>
 
                     {% if user.is_authenticated %}
+                        <a class="navbar-brand">{{ user.username }}</a>
 
-                        <li class="nav-item active">
+
+                        <li class="nav-item active text-center">
                                 <a class="nav-link"
                                    href="/accounts/logout/">Выход
                                     <span class="sr-only"></span>
