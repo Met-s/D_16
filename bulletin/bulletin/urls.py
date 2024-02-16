@@ -19,14 +19,22 @@ from django.urls import path
 from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
-
+# -----------
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
+from ckeditor_uploader import views as ckeditor_views
+# -----------
 from board.views import PostList
 
 urlpatterns = [
     path('', PostList.as_view(), name='post_list'),
     path('admin/', admin.site.urls),
     path('accounts/', include("allauth.urls")),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    # path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor/upload/', login_required(ckeditor_views.upload),
+         name='ckeditor_upload'),
+    path('ckeditor/browse/', never_cache(login_required(
+        ckeditor_views.browse)), name='ckeditor_browse'),
     path('posts/', include('board.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

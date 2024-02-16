@@ -105,6 +105,28 @@ CKEDITOR_CONFIGS = {
 }
 Подробнее здесь:
 https://django-ckeditor.readthedocs.io/en/latest/#plugins
+________Изменил настройки ckeditor______
+Без них пользователь аутентифицирован, но не авторизован для
+доступа к этой странице создания и изменения страницы, то-есть текст написать
+возможность есть, а добавить картинку и видео не получается.
+Выдаёт ошибку сервера.
+Что бы исправить нужно изменить:
+bulletin/bulletin/urls.py
+
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
+from ckeditor_uploader import views as ckeditor_views
+
+Вместо этого:
+path('ckeditor/', include('ckeditor_uploader.urls')),
+
+Добавить:
+    path('ckeditor/upload/', login_required(ckeditor_views.upload),
+         name='ckeditor_upload'),
+    path('ckeditor/browse/', never_cache(login_required(
+        ckeditor_views.browse)), name='ckeditor_browse'),
+    path('posts/', include('board.urls')),
+Всё работает!
 ___________Регистрация__________
 Установил Allauth:
 pip install django-allauth

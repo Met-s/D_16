@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
 from django.views.generic import (ListView, CreateView, DetailView,
                                   UpdateView, DeleteView)
-from django.contrib.auth.mixins import PermissionRequiredMixin, \
-    LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
+                                        # LoginRequiredMixin)
 from .models import Post
 from .forms import PostForm
 
@@ -21,9 +21,9 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 
-class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class PostCreate(PermissionRequiredMixin, CreateView):
     raise_exception = True  # pos LoginRequiredMixin
-    permission_required = 'add_post'
+    permission_required = 'board.add_post'
     form_class = PostForm
     model = Post
     template_name = 'board/post_create.html'
@@ -35,6 +35,7 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
 
 class PostUpdate(PermissionRequiredMixin, UpdateView):
+
     permission_required = 'board.add_post'
     form_class = PostForm
     model = Post
@@ -42,7 +43,8 @@ class PostUpdate(PermissionRequiredMixin, UpdateView):
 
 
 class PostDelete(PermissionRequiredMixin, DeleteView):
-    permission_required = 'board/add_post'
+
+    permission_required = 'board.add_post'
     model = Post
     template_name = 'board/post_delete.html'
     success_url = reverse_lazy('post_list')
