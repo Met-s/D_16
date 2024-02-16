@@ -109,7 +109,7 @@ ________Изменил настройки ckeditor______
 Без них пользователь аутентифицирован, но не авторизован для
 доступа к этой странице создания и изменения страницы, то-есть текст написать
 возможность есть, а добавить картинку и видео не получается.
-Выдаёт ошибку сервера.
+Выдаёт ошибку сервера. "incorrect server response"
 Что бы исправить нужно изменить:
 bulletin/bulletin/urls.py
 
@@ -249,8 +249,64 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1  # количество дней дл
 ACCOUNT_USERNAME_MIN_LENGTH = 4     # минимальное количество символов логина
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend' # "dummy" или
     "console" будет крутиться в консоли, если "smtp" то отправляется на сервер
-----------
 
+_______Настройки регистрации и авторизации allauth_____
+ С подтверждением по email:
+ settings.py
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+LOGIN_REDIRECT_URL = '/'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # 'mandatory' -
+# --------------
+ACCOUNT_EMAIL_CONFIRMATION = 1
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+ACCOUNT_FORMS = {'signup': 'board.forms.CustomSignUpForm'}
+# console, smtp
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv('email_host_user')
+EMAIL_HOST_PASSWORD = os.getenv('email_host_password')
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = os.getenv('default_from_email')
+
+SERVER_EMAIL = os.getenv('server_email')
+
+________Сокрытие личной информации "Паролей"_________
+Устанавливаем python-dotenv
+pip install python-dotenv
+----------
+Создаём текстовый файл в корневом каталоге проекта:
+
+D_16\bulletin\.env
+.env
+Добавляем его в .gitignore
+
+И записываем пароли
+email_host_user = "пароль"
+------------
+В settings.py импортируем
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+Применим:
+EMAIL_HOST_USER = os.getenv("email_host_user")
+
+python-dotenv · PyPI
+Подробнее здесь: https://pypi.org/project/python-dotenv/
 ----------
 
 ----------

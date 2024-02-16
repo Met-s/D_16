@@ -30,7 +30,6 @@ urlpatterns = [
     path('', PostList.as_view(), name='post_list'),
     path('admin/', admin.site.urls),
     path('accounts/', include("allauth.urls")),
-    # path('ckeditor/', include('ckeditor_uploader.urls')),
     path('ckeditor/upload/', login_required(ckeditor_views.upload),
          name='ckeditor_upload'),
     path('ckeditor/browse/', never_cache(login_required(
