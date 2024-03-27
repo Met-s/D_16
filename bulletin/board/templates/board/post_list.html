@@ -9,11 +9,15 @@
     <h1>Post List</h1>
     <hr>
     {% for post in posts %}
-        {{ post.post_author }}
+<h3>
         {{ post.post_category}}
-        <a href="{% url 'post_detail' pk=post.id %}">{{ post.post_title}}</a>
+<br>
+      <a href="{% url 'post_detail' pk=post.id %}">{{ post.post_title }}</a>
+        </h3>
         <div class="post__post_text post__item">{{ post.post_text|safe }}</div>
-        {{ post.post_date|date:'d M Y' }}
+        Автор: {{ post.post_author }}
+        <br>
+        Дата публикации: {{ post.post_date|date:'d M Y' }}
         <hr>
     {% endfor %}
 

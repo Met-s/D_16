@@ -1,23 +1,23 @@
 {% extends 'board/flatpages/default.html' %}
+
 {% block title %}
-Объявление
+    {{ post.post_title }}
 {% endblock title %}
 
 {% block content %}
     {% load static %}
         <h2>post.html</h2>
-<hr>
-<h2>{{ post.post_title }}</h2>
+    <hr>
+
 <div id="box">
-
     Категория: {{ post.post_category }}
-
 </div>
         {{post.post_text|safe }}
         <br>Автор объявления: {{post.post_author}}
         <br>Опубликовано: {{post.post_date|date:'d:M:Y'}}
-
 <h2>{{ post_detail.get_category_display }}</h2>
-
-
+    <hr>
+    <a href="{% url 'edit_post' pk=post.id %}">Редактирование поста</a>
+    <br />
+    <a href="{% url 'post_delete' pk=post.id %}">Удаление поста</a>
 {% endblock content %}
