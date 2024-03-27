@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение регистрации</title>
+</head>
+<body>
+    {% load account %}
+    <h3>Вы получили это сообщение, потому что пользователь {{ user.username }}
+        указал этот email при регистрации на сайте{{ site_domain }}.
+    </h3>
+    <h4>Для подтверждения регистрации пройдите по ссылке
+        <a href="{{ activate_url }}">Ссылка на сайт</a>
+    </h4>
+    <h4>Хорошего дня!</h4>
+
+</body>
+</html>

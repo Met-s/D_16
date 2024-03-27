@@ -65,6 +65,7 @@ python manage.py collectstatic
 Копируем из загруженного архива папку html5video в
 bulletin/static/ckeditor/ckeditor/plugins/
 
+
 В board\urls.py добавляем
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
