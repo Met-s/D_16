@@ -17,7 +17,9 @@
         <br>Опубликовано: {{post.post_date|date:'d:M:Y'}}
 <h2>{{ post_detail.get_category_display }}</h2>
     <hr>
-    <a href="{% url 'edit_post' pk=post.id %}">Редактирование поста</a>
-    <br />
-    <a href="{% url 'post_delete' pk=post.id %}">Удаление поста</a>
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'edit_post' pk=post.id %}">Редактирование поста</a>
+        <br />
+        <a href="{% url 'post_delete' pk=post.id %}">Удаление поста</a>
+    {% endif %}
 {% endblock content %}
