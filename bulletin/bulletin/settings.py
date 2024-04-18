@@ -139,13 +139,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'  # 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # 'none'  # 'mandatory'
 # --------------
 ACCOUNT_EMAIL_CONFIRMATION = 1
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_FORMS = {'signup': 'board.forms.CustomSignUpForm'}
 # console, smtp
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('email_host_user')
